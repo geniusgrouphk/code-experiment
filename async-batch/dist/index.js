@@ -21,21 +21,27 @@ _async2.default.map(arr, function (e, cb) {
   console.log(_util2.default.inspect(results));
 });
 
-var result = [];
-var addOneAsync = function addOneAsync(e, cb) {
+var sleep = function sleep(ms) {
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, ms);
+  });
+};
+
+var addOneAsync = async function addOneAsync(e, cb) {
+  if (e % 2) {
+    await sleep(2000);
+  }
   console.log(e + 1);
   cb(null, e + 1);
 };
-// test function work
-addOneAsync(1, function (err, r) {});
 
-var map = function map(arr, aFn, cbFinal) {
+var map = async function map(arr, aFn, cbFinal) {
   var result = [];
   var finalErr = null;
   console.log('test start: ' + _util2.default.inspect(arr));
 
-  var _loop = function _loop(i) {
-    aFn(arr[i], function (err, res) {
+  var _loop = async function _loop(i) {
+    await aFn(arr[i], function (err, res) {
       if (err) {
         finalErr = err;
       }
@@ -44,7 +50,7 @@ var map = function map(arr, aFn, cbFinal) {
   };
 
   for (var i = 0; i < arr.length; i++) {
-    _loop(i);
+    await _loop(i);
   }
 
   cbFinal(finalErr, result);

@@ -12,21 +12,25 @@ async.map(arr, (e, cb) => {
   console.log(util.inspect(results))
 })
 
-let result = []
-let addOneAsync = (e, cb) => {
+let sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+let addOneAsync = async (e, cb) => {
+  if (e % 2) {
+    await sleep(2000)
+  }
   console.log(e + 1)
   cb(null, e + 1)
 }
-// test function work
-addOneAsync(1, (err, r) => {})
 
-let map = (arr, aFn, cbFinal) => {
+let map = async (arr, aFn, cbFinal) => {
   let result = []
   let finalErr = null
   console.log('test start: ' + util.inspect(arr))
 
   for (let i = 0; i < arr.length; i++) {
-    aFn(arr[i], (err, res) => {
+    await aFn(arr[i], (err, res) => {
       if (err) {
          finalErr = err
       }
@@ -37,4 +41,4 @@ let map = (arr, aFn, cbFinal) => {
   cbFinal(finalErr, result)
 }
 
-map([1,2,3], addOneAsync, (err, result) => { console.log('final: ' + util.inspect(result)) })
+map([1, 2, 3], addOneAsync, (err, result) => { console.log('final: ' + util.inspect(result)) })
