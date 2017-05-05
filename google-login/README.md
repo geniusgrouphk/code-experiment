@@ -1,10 +1,5 @@
 This demonstrate how to get user info from Google by using googleapis lib
 
-## Dependencies
-- express 4+
-- bunyan 8+
-- googleapis 19+
-
 ## Install
 npm i
 

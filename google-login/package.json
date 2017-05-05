@@ -26,6 +26,8 @@
   "dependencies": {
     "bunyan": "^1.8.10",
     "express": "^4.15.2",
-    "googleapis": "^19.0.0"
+    "googleapis": "^19.0.0",
+    "jsonwebtoken": "^7.4.0",
+    "passport": "^0.3.2"
   }
 }
