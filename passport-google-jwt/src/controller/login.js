@@ -7,7 +7,7 @@ import config from '../config/config'
 const router = Router()
 
 router.get('/', (req, res, next) => {
-  res.send('please choose a social platform to login')
+  res.send('please choose a social platform to login: http://localhost:8080/login/google')
 })
 
 router.get('/:platform', (req, res, next) => {

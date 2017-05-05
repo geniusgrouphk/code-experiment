@@ -13,6 +13,7 @@ passport.use('jwt', new JwtStrategy({
   secretOrKey: config.auth.jwt.secret
 }, (user, next) => {
   logger.debug('payload received', user)
+  user.from = 'jwt'
   next(null, user)
 }))
 
