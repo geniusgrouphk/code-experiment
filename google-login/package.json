@@ -21,13 +21,15 @@
   "homepage": "https://github.com/geniusgrouphk/code-experiment#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "standard": "^10.0.2"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
     "bunyan": "^1.8.10",
     "express": "^4.15.2",
     "jsonwebtoken": "^7.4.0",
+    "lodash": "^4.17.4",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1"
   }

@@ -1,12 +1,11 @@
 import express from 'express'
-import jwt from 'jsonwebtoken'
-import passport from 'passport'
-import passportJWT from 'passport-jwt'
+
+import logger from '../util/logger'
 
 const routes = express.Router()
 
-routes.get('/login', res => {
-
+routes.get('/', res => {
+  logger.debug('user login')
 })
 
 routes.get('/profile', (req, res, next) => {
