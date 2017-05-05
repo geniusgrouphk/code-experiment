@@ -1,14 +1,15 @@
 import credentials from './credentials'
 
 const port = process.env.PORT || 8080
+
 module.exports = {
   'port': port,
-  'loginUrl': 'http://localhost:' + port + '/auth',
+  'loginUrl': 'http://localhost:' + port + '/login',
   'auth': {
     'google': {
       'clientId': credentials.googleClientId,
       'clientSecret': credentials.googleClientSecret,
-      'callbackUrl': 'http://localhost:' + port + '/auth/google/callback'
+      'callbackUrl': 'http://localhost:8080/oauth2/google/callback'
     }
   },
   'mongoDbUrl': 'mongodb://' +
