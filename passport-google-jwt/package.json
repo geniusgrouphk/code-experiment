@@ -1,7 +1,7 @@
 {
-  "name": "google-login",
+  "name": "passport-google-jwt",
   "version": "1.0.0",
-  "description": "experiment for google login and local jwt",
+  "description": "experiment for google login, with jwt to retrieve user info after successful login",
   "main": "index.js",
   "scripts": {
     "build": "babel src -d dist",

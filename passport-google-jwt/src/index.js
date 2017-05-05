@@ -1,24 +1,12 @@
-import express from 'express'
-import bodyParser from 'body-parser'
 import util from 'util'
 
+import app from './config/app'
 import logger from './util/logger'
 import config from './config/config'
 import passport from './config/passport'
+import routes from './controller'
 
-const app = express()
-
-app.use(passport.initialize())
-
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
-
-app.use(bodyParser.json())
-app.get('/',
-(req, res) => {
-  res.json(req.user)
-})
+app.use('/', routes)
 
 app.get('/login/google',
   passport.authenticate('google', {
@@ -26,15 +14,19 @@ app.get('/login/google',
   })
 )
 
-app.get('/oauth2/google/callback',   // Finish OAuth 2 flow using Passport.js
-  passport.authenticate('google'),
+app.get('/oauth2/google/callback', (req, res, next) => {
+  passport.authenticate('google', (err, user, info) => {
+    if (err) {
+      logger.warn(util.inspect(err))
+      res.json('failed retrieving user info')
+      return
+    }
 
-  // Redirect back to the original page, if any
-  (req, res) => {
     logger.debug('user come back...')
-    logger.debug(util.inspect(req.user))
-    res.json(req.user)
-  })
+    logger.debug(util.inspect(user))
+    res.json(user)
+  })(req, res, next)
+})
 
 app.listen(config.port, () => {
   logger.debug('app listening to port: ' + config.port)

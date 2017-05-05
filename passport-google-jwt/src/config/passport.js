@@ -2,7 +2,7 @@ import passport from 'passport'
 import { Strategy } from 'passport-google-oauth20'
 import config from './config'
 
-function extractProfile (profile) {
+const extractGoogleProfile = (profile) => {
   let imageUrl = ''
   if (profile.photos && profile.photos.length) {
     imageUrl = profile.photos[0].value
@@ -20,12 +20,13 @@ passport.use(new Strategy({
   callbackURL: config.auth.google.callbackUrl,
   accessType: 'offline'
 }, (accessToken, refreshToken, profile, cb) => {
-  cb(null, extractProfile(profile))
+  cb(null, extractGoogleProfile(profile))
 }))
 
 passport.serializeUser((user, cb) => {
   cb(null, user)
 })
+
 passport.deserializeUser((obj, cb) => {
   cb(null, obj)
 })

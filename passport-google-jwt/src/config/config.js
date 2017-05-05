@@ -9,7 +9,7 @@ module.exports = {
     'google': {
       'clientId': credentials.googleClientId,
       'clientSecret': credentials.googleClientSecret,
-      'callbackUrl': 'http://localhost:8080/oauth2/google/callback'
+      'callbackUrl': 'http://localhost:' + port + '/oauth2/google/callback'
     }
   },
   'mongoDbUrl': 'mongodb://' +
