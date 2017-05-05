@@ -1,5 +1,7 @@
 import { Router } from 'express'
+import passport from 'passport'
 
+import config from '../config/config'
 import loginController from './login'
 import userController from './user'
 import oauth2CallbackController from './oauth2Callback'
@@ -13,7 +15,10 @@ router.get('/', (req, res) => {
 })
 
 router.use('/login', loginController)
-router.use('oauth2', oauth2CallbackController)
-router.use('/user', userController)
+router.use('/oauth2', oauth2CallbackController)
+router.use('/user', passport.authenticate('jwt', {
+  session: false,
+  failureRedirect: config.loginUrl
+}), userController)
 
 module.exports = router

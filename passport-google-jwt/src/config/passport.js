@@ -2,15 +2,18 @@ import passport from 'passport'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import jwt from 'jsonwebtoken'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
+import util from 'util'
 
 import config from './config'
 import logger from '../util/logger'
 
 passport.use('jwt', new JwtStrategy({
-  jwtFromRequest: ExtractJwt.fromAuthHeader(),
+  // jwtFromRequest: ExtractJwt.fromAuthHeader(), // not using header due to demo
+  jwtFromRequest: ExtractJwt.fromUrlQueryParameter('token'),
   secretOrKey: config.auth.jwt.secret
-}, (payload, next) => {
-  logger.debug('payload received', payload);
+}, (user, next) => {
+  logger.debug('payload received', user)
+  next(null, user)
 }))
 
 passport.use('google', new GoogleStrategy({
@@ -19,17 +22,18 @@ passport.use('google', new GoogleStrategy({
   callbackURL: config.auth.google.callbackUrl,
   accessType: 'offline'
 }, (accessToken, refreshToken, profile, cb) => {
-  cb(null, (profile) => {
+  cb(null, ((profile) => {
     let imageUrl = ''
     if (profile.photos && profile.photos.length) {
       imageUrl = profile.photos[0].value
     }
+
     return {
       id: profile.id,
       displayName: profile.displayName,
       image: imageUrl
-    }}
-  )
+    }
+  })(profile))
 }))
 
 passport.serializeUser((user, cb) => {

@@ -1,5 +1,9 @@
 import { Router } from 'express'
+import passport from 'passport'
+import util from 'util'
+import jwt from 'jsonwebtoken'
 
+import config from '../config/config'
 import logger from '../util/logger'
 
 const router = Router()
@@ -15,7 +19,10 @@ router.get('/:platform/callback', (req, res, next) => {
 
     logger.debug('user come back...')
     logger.debug(util.inspect(user))
-    res.json(user)
+    logger.debug(util.inspect(info))
+    let token = jwt.sign(user, config.auth.jwt.secret)
+
+    res.json({user: user, token: token})
   })(req, res, next)
 })
 
