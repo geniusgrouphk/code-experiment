@@ -26,15 +26,18 @@ app.get('/login/google',
   })
 )
 
-app.get('/oauth2/google/callback',   // Finish OAuth 2 flow using Passport.js
-  passport.authenticate('google'),
+app.get('/oauth2/google/callback', (req, res, next) => {
+  passport.authenticate('google', (err, user, info) => {
+    if (err) {
+      logger.warn(util.inspect(err))
+      res.json('failed retrieving user info')
+    }
 
-  // Redirect back to the original page, if any
-  (req, res) => {
     logger.debug('user come back...')
     logger.debug(util.inspect(req.user))
     res.json(req.user)
-  })
+  })(req, res, next)
+})
 
 app.listen(config.port, () => {
   logger.debug('app listening to port: ' + config.port)
