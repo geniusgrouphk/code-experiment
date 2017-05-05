@@ -31,11 +31,12 @@ app.get('/oauth2/google/callback', (req, res, next) => {
     if (err) {
       logger.warn(util.inspect(err))
       res.json('failed retrieving user info')
+      return
     }
 
     logger.debug('user come back...')
-    logger.debug(util.inspect(req.user))
-    res.json(req.user)
+    logger.debug(util.inspect(user))
+    res.json(user)
   })(req, res, next)
 })
 
