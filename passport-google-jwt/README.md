@@ -1,10 +1,8 @@
 This demonstrate how to get user info from Google by using googleapis lib
 
 ## Prerequisites
-- Google
-- Google People API
-
-
+- Google+ API
+- Google People API Enabled
 
 ## Install
 npm i
