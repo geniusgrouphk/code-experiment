@@ -1,8 +1,6 @@
 import passport from 'passport'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
-import jwt from 'jsonwebtoken'
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
-import util from 'util'
 
 import config from './config'
 import logger from '../util/logger'

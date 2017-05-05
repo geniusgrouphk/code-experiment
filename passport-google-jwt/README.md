@@ -5,7 +5,9 @@ This demonstrate how to get user info from Google by using googleapis lib
 - Google People API Enabled
 
 ## Install
-npm i
+
+1. npm i
+1. rename the credentials.example.js and fill in necessary information
 
 ## run
 [PORT=DESIRED_PORT] npm start

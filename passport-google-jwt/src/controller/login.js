@@ -2,7 +2,6 @@ import { Router } from 'express'
 import passport from 'passport'
 
 import logger from '../util/logger'
-import config from '../config/config'
 
 const router = Router()
 
