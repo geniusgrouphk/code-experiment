@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 })
 
 router.use('/login', loginController)
-router.use('/user', userController)
 router.use('oauth2', oauth2CallbackController)
+router.use('/user', userController)
 
 module.exports = router

@@ -10,6 +10,9 @@ module.exports = {
       'clientId': credentials.googleClientId,
       'clientSecret': credentials.googleClientSecret,
       'callbackUrl': 'http://localhost:' + port + '/oauth2/google/callback'
+    },
+    'jwt': {
+      'secret': credentials.jwtSecretKey
     }
   },
   'mongoDbUrl': 'mongodb://' +
