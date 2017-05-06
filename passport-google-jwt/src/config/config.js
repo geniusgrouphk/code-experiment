@@ -12,7 +12,8 @@ module.exports = {
       'callbackUrl': 'http://localhost:' + port + '/oauth2/google/callback'
     },
     'jwt': {
-      'secret': credentials.jwtSecretKey
+      'secret': credentials.jwtSecretKey,
+      'ttl': '30m'
     }
   },
   'mongoDbUrl': 'mongodb://' +
