@@ -1,0 +1,8 @@
+{
+  "name": "aws-lambda-consumer",
+  "description": "Experiment to consume AWS SQ Tasks on AWS Lambda",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::999999999999999999:role/aws-lambda-consumer_lambda_function",
+  "environment": {}
+}
