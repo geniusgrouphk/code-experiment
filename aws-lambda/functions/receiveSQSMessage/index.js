@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk')
 const config = require('./config/config')
 
-AWS.config.loadFromPath('./config/aws.json')
+AWS.config.loadFromPath('./config/aws-credentials.json')
 const SQS = new AWS.SQS({ apiVersion: '2012-11-05' })
 const Lambda = new AWS.Lambda({ apiVersion: '2015-03-31' })
 
