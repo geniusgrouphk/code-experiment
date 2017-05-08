@@ -1,5 +1,5 @@
 {
-  "name": "aws-lambda-consumer",
+  "name": "aws-lambda-experiment",
   "description": "Experiment to consume AWS SQ Tasks on AWS Lambda",
   "memory": 128,
   "timeout": 5,
