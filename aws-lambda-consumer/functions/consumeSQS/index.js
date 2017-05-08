@@ -34,6 +34,7 @@ const processMessage = (message, callback) => {
   }
   SQS.deleteMessage(params, (err) => callback(err, message))
 }
+
 const poll = (functionName, callback) => {
   const params = {
     QueueUrl: QUEUE_URL,
@@ -44,6 +45,10 @@ const poll = (functionName, callback) => {
   SQS.receiveMessage(params, (err, data) => {
     if (err) {
       return callback(err)
+    }
+    if (!data.Messages) {
+      console.log('queue is empty, quite now')
+      return
     }
 
     const promises = data.Messages.map((message) => invokePoller(functionName, message))
