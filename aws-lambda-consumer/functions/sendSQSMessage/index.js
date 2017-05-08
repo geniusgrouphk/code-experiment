@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk')
 const config = require('./config/config')
-AWS.config.loadFromPath('./config/aws.json')
+
 const SQS = new AWS.SQS({ apiVersion: '2012-11-05' })
 const Lambda = new AWS.Lambda({ apiVersion: '2015-03-31' })
 
@@ -8,8 +8,7 @@ const Lambda = new AWS.Lambda({ apiVersion: '2015-03-31' })
 const QUEUE_URL = config.queueUrl
 const PROCESS_MESSAGE = 'process-message'
 
-
-const invokePoller = (functionName, message) => {
+function invokePoller (functionName, message) {
   const payload = {
     operation: PROCESS_MESSAGE,
     message
@@ -24,8 +23,10 @@ const invokePoller = (functionName, message) => {
   })
 }
 
-const processMessage = (message, callback) => {
+function processMessage (message, callback) {
   console.log(message)
+
+    // TODO process message
 
     // delete message
   const params = {
@@ -34,19 +35,21 @@ const processMessage = (message, callback) => {
   }
   SQS.deleteMessage(params, (err) => callback(err, message))
 }
-const poll = (functionName, callback) => {
+
+function poll (functionName, callback) {
   const params = {
     QueueUrl: QUEUE_URL,
     MaxNumberOfMessages: 10,
     VisibilityTimeout: 10
   }
-
+    // batch request messages
   SQS.receiveMessage(params, (err, data) => {
     if (err) {
       return callback(err)
     }
-
+        // for each message, reinvoke the function
     const promises = data.Messages.map((message) => invokePoller(functionName, message))
+        // complete when all invocations have been made
     Promise.all(promises).then(() => {
       const result = `Messages received: ${data.Messages.length}`
       console.log(result)
@@ -58,8 +61,10 @@ const poll = (functionName, callback) => {
 exports.handle = (event, context, callback) => {
   try {
     if (event.operation === PROCESS_MESSAGE) {
+            // invoked by poller
       processMessage(event.message, callback)
     } else {
+            // invoked by schedule
       poll(context.functionName, callback)
     }
   } catch (err) {
