@@ -20,6 +20,8 @@ router.get('/:platform/callback', (req, res, next) => {
     logger.debug('user come back...')
     logger.debug(util.inspect(user))
     logger.debug(util.inspect(info))
+    // TODO check user identity from DB, add scope for authz to the token,
+    //and necessary user details
     let token = jwt.sign(user, config.auth.jwt.secret, { expiresIn:  config.auth.jwt.ttl })
 
     res.json({user: user, token: token})
