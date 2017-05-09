@@ -20,9 +20,9 @@
   },
   "homepage": "https://github.com/geniusgrouphk/code-experiment#readme",
   "devDependencies": {
+    "ava": "^0.19.1",
     "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "standard": "^10.0.2"
+    "babel-preset-es2015": "^6.24.1"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
