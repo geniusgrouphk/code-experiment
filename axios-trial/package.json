@@ -1,0 +1,14 @@
+{
+  "name": "axios-trial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server",
+  },
+  "author": "Matthew Lam",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
+}
