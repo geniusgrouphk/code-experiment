@@ -10,3 +10,5 @@ Experiment to use GraphQL to manage data in Mongo Atlas
 
 After inserting authors, you can try querying by
 `http://localhost:3000/query/authors?query=%7Bauthors(name%3A%22Test%22)%7B_id%2Cname%7D%7D`
+OR
+`http://localhost:3000/query/authors?query=%7Bauthors(name%3A%22Test%22)%7Bname%7D%7D`
