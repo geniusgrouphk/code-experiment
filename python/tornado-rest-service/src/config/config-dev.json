@@ -1,0 +1,5 @@
+{
+  "port": 3000,
+  "debug": true,
+  "log_level": 10
+}

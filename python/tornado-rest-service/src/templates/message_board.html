@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(() => {
+            var ws = new WebSocket("ws://localhost:3000/subscribe");
+            ws.onmessage = ({ data }) => {
+                $('#messages').prepend('<div>' + data + '</div>');
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h2>Books to be expired:</h2>
+    <div id="messages"></div>
+</body>
+
+</html>
